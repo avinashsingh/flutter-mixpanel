@@ -7,7 +7,9 @@ homepage: https://github.com/g123k/flutter-mixpanel
 dependencies:
   flutter:
     sdk: flutter
-
+environment:
+  sdk: ">=2.0.0 <3.0.0"
+  
 # The following section is specific to Flutter.
 flutter:
   plugin:
