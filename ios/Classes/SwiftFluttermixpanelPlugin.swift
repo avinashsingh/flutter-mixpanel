@@ -31,6 +31,8 @@ public class SwiftFluttermixpanelPlugin: NSObject, FlutterPlugin {
         getDistinctId(result: result, mixpanel: mixpanel)
     case "flush":
         flush(result: result, mixpanel: mixpanel)
+    case "fcmtoken":
+        fcmtoken(args: args, result: result, mixpanel: mixpanel)
     default:
         result(FlutterMethodNotImplemented)
     }
@@ -48,6 +50,19 @@ public class SwiftFluttermixpanelPlugin: NSObject, FlutterPlugin {
         }
         
         mixpanel.track(event: eventName)
+        result(nil)
+    }
+    
+    
+    func fcmtoken(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
+        let eventName = (args["fcmtoken"] as! String)
+        
+        if (eventName.isEmpty) {
+            result(FlutterError.init(code: "ERROR", message: "The fcmtoken argument is missing!", details: nil))
+            return
+        }
+        
+        mixpanel.people.set(property: "$ios_devices", to: eventName)
         result(nil)
     }
     
