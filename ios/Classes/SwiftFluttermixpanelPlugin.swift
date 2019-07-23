@@ -49,7 +49,7 @@ public class SwiftFluttermixpanelPlugin: NSObject, FlutterPlugin {
 
 
     func setPeople(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
-        let propertyName = (args["propertyName"] as! String)
+        let propertyName = (args["property_name"] as! String)
         let value = (args["value"] as! String)
 
         if (propertyName.isEmpty) {
