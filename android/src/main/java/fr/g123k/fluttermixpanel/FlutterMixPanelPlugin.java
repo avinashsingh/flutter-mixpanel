@@ -81,8 +81,6 @@ public class FlutterMixPanelPlugin implements MethodCallHandler {
             reset(mixPanel, result);
         } else if (call.method.equals("flush")) {
             flush(mixPanel, result);
-        } else if (call.method.equals("fcmtoken"))  {
-            fcmtoken(mixPanel, call, result);
         } else {
             result.notImplemented();
         }
@@ -151,15 +149,6 @@ public class FlutterMixPanelPlugin implements MethodCallHandler {
         }
 
         mixPanel.identify(call.argument("distinct_id").toString());
-        result.success(null);
-    }
-
-    private void fcmtoken(MixpanelAPI mixPanel, MethodCall call, Result result) {
-        if (!call.hasArgument("identity")) {
-            result.error("ERROR", "The identity argument is missing!", null);
-        }
-
-        mixPanel.getPeople().union("$android_devices", call.argument("fcmtoken").toString());
         result.success(null);
     }
 
