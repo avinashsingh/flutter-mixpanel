@@ -23,7 +23,7 @@ public class SwiftFluttermixpanelPlugin: NSObject, FlutterPlugin {
     switch (call.method) {
     case "people/set":
         setPeople(args: args, result: result, mixpanel: mixpanel)
-    case "people/setMap":
+    case "people/set_map":
         setPeopleMap(args: args, result: result, mixpanel: mixpanel)
     case "people/identify":
         setPeopleIdentify(args: args, result: result, mixpanel: mixpanel)
