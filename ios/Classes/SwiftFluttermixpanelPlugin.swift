@@ -19,8 +19,16 @@ public class SwiftFluttermixpanelPlugin: NSObject, FlutterPlugin {
     }
     
     let mixpanel = Mixpanel.initialize(token: token)
-    
+
     switch (call.method) {
+    case "people/set":
+        setPeople(args: args, result: result, mixpanel: mixpanel)
+    case "people/setMap":
+        setPeopleMap(args: args, result: result, mixpanel: mixpanel)
+    case "people/identify":
+        setPeopleIdentify(args: args, result: result, mixpanel: mixpanel)
+    case "identify":
+        setIdentify(args: args, result: result, mixpanel: mixpanel)
     case "track":
         track(args: args, result: result, mixpanel: mixpanel)
     case "track_map":
@@ -38,7 +46,57 @@ public class SwiftFluttermixpanelPlugin: NSObject, FlutterPlugin {
     
     mixpanel.flush()
   }
-    
+
+
+    func setPeople(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
+        let propertyName = (args["propertyName"] as! String)
+        let value = (args["value"] as! String)
+
+        if (propertyName.isEmpty) {
+            result(FlutterError.init(code: "ERROR", message: "The propertyName argument is missing!", details: nil))
+            return
+        }
+
+        mixpanel.people.set(property: propertyName, to: value)
+        result(nil)
+    }
+
+    func setPeopleMap(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
+        let propertiesMap = (args["properties_map"] as? NSDictionary)
+
+        if (propertiesMap == nil) {
+            result(FlutterError.init(code: "ERROR", message: "The properties map argument is missing!", details: nil))
+            return
+        }
+
+        let props = propertiesMap as! Dictionary<String, Any>
+        var map = [String: MixpanelType]()
+
+        for (key, value) in props {
+            map[key] = value as? MixpanelType;
+        }
+
+        mixpanel.people.set(properties: map)
+        result(nil)
+    }
+
+    func setPeopleIdentify(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
+        setIdentify(args: args, result: result, mixpanel: mixpanel)
+    }
+
+    func setIdentify(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
+        let id = (args["distinct_id"] as! String)
+
+        if (id.isEmpty) {
+            result(FlutterError.init(code: "ERROR", message: "The distinct_id argument is missing!", details: nil))
+            return
+        }
+
+        mixpanel.identify(distinctId: id)
+        result(nil)
+    }
+
+
     func track(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
         let eventName = (args["event_name"] as! String)
         
