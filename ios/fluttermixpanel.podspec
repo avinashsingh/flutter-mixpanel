@@ -16,7 +16,6 @@ A new flutter plugin project.
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.dependency 'Mixpanel-swift'
-  s.swift_version    = '4.1'
   
   s.ios.deployment_target = '8.0'
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.2' }
