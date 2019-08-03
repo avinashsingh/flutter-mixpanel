@@ -150,6 +150,11 @@ class MixpanelPeople {
     return null;
   }
 
+  Future<void> pushdevicetoken(String tokenA) async {
+    await _invokeMethod('pushdevicetoken', args: {'tokenA': tokenA});
+    return null;
+  }
+
   Future<void> increment(String name, double increment) async {
     await _invokeMethod('increment',
         args: {'name': name, 'increment': increment});

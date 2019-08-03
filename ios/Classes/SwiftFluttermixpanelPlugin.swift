@@ -87,7 +87,7 @@ public class SwiftFluttermixpanelPlugin: NSObject, FlutterPlugin {
     }
 
     func pushdevicetoken(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
-        let token = (args["token"] as! String)
+        let token = (args["tokenA"] as! String)
 
         if (token == nil) {
           return
