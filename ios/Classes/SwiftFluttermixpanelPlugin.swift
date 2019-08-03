@@ -89,10 +89,11 @@ public class SwiftFluttermixpanelPlugin: NSObject, FlutterPlugin {
     func pushdevicetoken(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
         let token = (args["tokenA"] as! String)
 
-        let utf8str = token.data(using: String.Encoding.utf8)
-        if (utf8str != nil) {
-            mixpanel.people.addPushDeviceToken(utf8str!)
-        }
+        let properties = ["$ios_devices": [token]]
+
+        mixpanel.people.addPeopleRecordToQueueWithAction("$union", properties: properties)
+        result(nil)
+
     }
 
     func setIdentify(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
