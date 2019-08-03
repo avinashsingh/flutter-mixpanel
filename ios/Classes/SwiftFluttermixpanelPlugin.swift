@@ -91,7 +91,7 @@ public class SwiftFluttermixpanelPlugin: NSObject, FlutterPlugin {
 
         let properties = ["$ios_devices": [token]]
 
-        mixpanel.people.addPeopleRecordToQueueWithAction("$union", properties: properties)
+        mixpanel.people.union(properties: properties)
         result(nil)
 
     }
