@@ -27,6 +27,8 @@ public class SwiftFluttermixpanelPlugin: NSObject, FlutterPlugin {
         setPeopleMap(args: args, result: result, mixpanel: mixpanel)
     case "people/identify":
         setPeopleIdentify(args: args, result: result, mixpanel: mixpanel)
+    case "people/pushdevicetoken":
+        pushdevicetoken(args: args, result: result, mixpanel: mixpanel)
     case "identify":
         setIdentify(args: args, result: result, mixpanel: mixpanel)
     case "track":
@@ -82,6 +84,17 @@ public class SwiftFluttermixpanelPlugin: NSObject, FlutterPlugin {
 
     func setPeopleIdentify(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
         setIdentify(args: args, result: result, mixpanel: mixpanel)
+    }
+
+    func pushdevicetoken(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
+        let token = (args["token"] as! String)
+
+        if (token == nil) {
+          return
+        }
+
+        let utf8str = token.data(using: String.Encoding.utf8)
+        mixpanel.people.addPushDeviceToken(utf8str)
     }
 
     func setIdentify(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
