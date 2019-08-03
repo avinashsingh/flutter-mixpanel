@@ -89,12 +89,10 @@ public class SwiftFluttermixpanelPlugin: NSObject, FlutterPlugin {
     func pushdevicetoken(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
         let token = (args["tokenA"] as! String)
 
-        if (token == nil) {
-          return
-        }
-
         let utf8str = token.data(using: String.Encoding.utf8)
-        mixpanel.people.addPushDeviceToken(utf8str)
+        if (utf8str != nil) {
+            mixpanel.people.addPushDeviceToken(utf8str!)
+        }
     }
 
     func setIdentify(args: NSDictionary, result: @escaping FlutterResult, mixpanel : MixpanelInstance) {
