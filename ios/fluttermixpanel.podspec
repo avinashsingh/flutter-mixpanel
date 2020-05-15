@@ -20,6 +20,6 @@ A new flutter plugin project.
   s.swift_version = "4.2"
   
   s.ios.deployment_target = '8.0'
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.2' }
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
 end
 
