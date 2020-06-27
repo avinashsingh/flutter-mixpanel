@@ -22,11 +22,11 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 16
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
         disable 'InvalidPackage'
@@ -35,5 +35,5 @@ android {
 
 dependencies {
     implementation 'com.mixpanel.android:mixpanel-android:5.3.+'
-    implementation 'com.android.support:support-core-utils:27.+'
+    implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
 }
